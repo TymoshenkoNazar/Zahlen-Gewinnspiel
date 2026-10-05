@@ -1,31 +1,33 @@
-import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
-public class GewinnController {
+/**
+ * Verbindet das Gewinnspiel-Modell mit der grafischen Benutzeroberflaeche.
+ */
+public class GewinnController implements ActionListener {
     private GewinnModel model;
     private GewinnView view;
 
+    /**
+     * Erstellt einen Controller und registriert die Listener der View.
+     *
+     * @param model Modell mit der Spiellogik und dem aktuellen Punktestand
+     * @param view Benutzeroberflaeche des Gewinnspiels
+     */
     public GewinnController(GewinnModel model, GewinnView view) {
         this.model = model;
         this.view = view;
 
-        this.view.getTxtSpielerZahl().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                verarbeiteEingabe();
-            }
-        });
-
-        this.view.getBtnReset().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetRunde();
-            }
-        });
+        this.view.getTxtSpielerZahl().addActionListener(this);
+        this.view.getBtnReset().addActionListener(this);
     }
 
+
+    /**
+     * Liest die Spielereingabe ein, berechnet die Runde und aktualisiert die View.
+     */
     private void verarbeiteEingabe() {
         String input = view.getTxtSpielerZahl().getText().trim();
         try {
@@ -66,6 +68,9 @@ public class GewinnController {
         }
     }
 
+    /**
+     * Setzt das Modell und alle sichtbaren Eingabefelder auf den Startzustand zurueck.
+     */
     private void resetRunde() {
         model.reset();
         view.getTxtSpielerZahl().setText("");
@@ -79,6 +84,24 @@ public class GewinnController {
         view.getLblGesamtpunkte().setBackground(Color.WHITE);
     }
 
+    /**
+     * Verarbeitet alle Aktionen der View.
+     *
+     * @param e ausgelöstes Ereignis
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == view.getTxtSpielerZahl()) {
+            verarbeiteEingabe();
+        } else if (e.getSource() == view.getBtnReset()) {
+            resetRunde();
+        }
+    }
+    /**
+     * Startet die Swing-Anwendung im Event-Dispatch-Thread.
+     *
+     * @param args Kommandozeilenargumente, die von der Anwendung nicht benoetigt werden
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             GewinnModel model = new GewinnModel();

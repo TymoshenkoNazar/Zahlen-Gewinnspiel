@@ -1,6 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Grafische Benutzeroberflaeche fuer das Zahlen-Gewinnspiel.
+ */
 public class GewinnView extends JFrame {
     private JLabel lblRundenErgebnis;
     private JLabel lblGesamtpunkte;
@@ -8,6 +11,9 @@ public class GewinnView extends JFrame {
     private JTextField txtComputerZahl;
     private JButton btnReset;
 
+    /**
+     * Erstellt und konfiguriert das Hauptfenster des Spiels.
+     */
     public GewinnView() {
         setTitle("Zahlen-Gewinnspiel (v1.0)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,9 +68,28 @@ public class GewinnView extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * @return Label fuer das Ergebnis der aktuellen Runde
+     */
     public JLabel getLblRundenErgebnis() { return lblRundenErgebnis; }
+
+    /**
+     * @return Label fuer den Gesamtpunktestand
+     */
     public JLabel getLblGesamtpunkte() { return lblGesamtpunkte; }
+
+    /**
+    * @return Eingabefeld fuer die Spielzahl
+     */
     public JTextField getTxtSpielerZahl() { return txtSpielerZahl; }
+
+    /**
+     * @return nicht editierbares Feld fuer die Computerzahl
+     */
     public JTextField getTxtComputerZahl() { return txtComputerZahl; }
+
+    /**
+     * @return Schaltflaeche zum Zuruecksetzen des Spiels
+     */
     public JButton getBtnReset() { return btnReset; }
 }
