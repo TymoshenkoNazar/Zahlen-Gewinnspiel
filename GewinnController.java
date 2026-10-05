@@ -5,6 +5,8 @@ import javax.swing.*;
 
 /**
  * Verbindet das Gewinnspiel-Modell mit der grafischen Benutzeroberflaeche.
+ * @version 05-10-2026
+ * @author Tymoshenko Nazar
  */
 public class GewinnController implements ActionListener {
     private GewinnModel model;
@@ -51,9 +53,8 @@ public class GewinnController implements ActionListener {
                 view.getLblRundenErgebnis().setText(erg > 0 ? "+" + erg : String.valueOf(erg));
             }
 
-            boolean verloren = model.hatVerloren();
-            view.getTxtSpielerZahl().setEnabled(!verloren);
-            view.getBtnReset().setEnabled(verloren);
+            view.getTxtSpielerZahl().setEnabled(false);
+            view.getBtnReset().setEnabled(true);
 
             if (model.getRundenErgebnis() > 0 || model.hatGewonnen()) {
                 view.getLblRundenErgebnis().setBackground(Color.GREEN);
@@ -72,7 +73,10 @@ public class GewinnController implements ActionListener {
      * Setzt das Modell und alle sichtbaren Eingabefelder auf den Startzustand zurueck.
      */
     private void resetRunde() {
-        model.reset();
+        if (model.hatVerloren()) {
+            model.reset();
+        }
+
         view.getTxtSpielerZahl().setText("");
         view.getTxtComputerZahl().setText("");
         view.getLblRundenErgebnis().setText("");
@@ -103,11 +107,9 @@ public class GewinnController implements ActionListener {
      * @param args Kommandozeilenargumente, die von der Anwendung nicht benoetigt werden
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            GewinnModel model = new GewinnModel();
-            GewinnView view = new GewinnView();
-            new GewinnController(model, view);
-            view.setVisible(true);
-        });
+        GewinnModel model = new GewinnModel();
+        GewinnView view = new GewinnView();
+        new GewinnController(model, view);
+        view.setVisible(true);
     }
 }

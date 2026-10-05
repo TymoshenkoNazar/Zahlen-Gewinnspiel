@@ -3,6 +3,8 @@ import javax.swing.*;
 
 /**
  * Grafische Benutzeroberflaeche fuer das Zahlen-Gewinnspiel.
+ * @version 04-10-2026
+ * @author Tymoshenko Nazar
  */
 public class GewinnView extends JFrame {
     private JLabel lblRundenErgebnis;

@@ -2,6 +2,8 @@ import java.util.Random;
 
 /**
  * Enthaelt die Spiellogik und verwaltet den Punktestand des Gewinnspiels.
+ * @version 04-10-2026
+ * @author Tymoshenko Nazar
  */
 public class GewinnModel {
     private int gesamtPunkte;
